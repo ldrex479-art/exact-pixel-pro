@@ -64,7 +64,7 @@ function Reveal({ children, className = "", delay = 0 }: { children: ReactNode; 
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current; if (!el) return;
-    const io = new IntersectionObserver(([en]) => { if (en.isIntersecting) { el.classList.add("in"); io.disconnect(); } }, { threshold: 0.12 });
+    const io = new IntersectionObserver(([en]) => { if (en?.isIntersecting) { el.classList.add("in"); io.disconnect(); } }, { threshold: 0.12 });
     io.observe(el); return () => io.disconnect();
   }, []);
   return <div ref={ref} className={`reveal ${className}`} style={{ transitionDelay: `${delay}ms` }}>{children}</div>;
@@ -79,7 +79,7 @@ function Tilt({ children, className = "" }: { children: ReactNode; className?: s
   const reset = () => { if (ref.current) ref.current.style.transform = ""; };
   return (
     <div ref={ref} className={`lux-card ${className}`} onMouseMove={(e) => move(e.clientX, e.clientY)} onMouseLeave={reset}
-      onTouchMove={(e) => move(e.touches[0].clientX, e.touches[0].clientY)} onTouchEnd={reset}>{children}</div>
+      onTouchMove={(e) => move(e.touches[0]!.clientX, e.touches[0]!.clientY)} onTouchEnd={reset}>{children}</div>
   );
 }
 function CountUp({ to }: { to: number }) {
@@ -87,7 +87,7 @@ function CountUp({ to }: { to: number }) {
   useEffect(() => {
     const el = ref.current; if (!el) return;
     const io = new IntersectionObserver(([en]) => {
-      if (!en.isIntersecting) return; io.disconnect();
+      if (!en?.isIntersecting) return; io.disconnect();
       const t0 = performance.now();
       const tick = (t: number) => { const k = Math.min(1, (t - t0) / 1200); setV(Math.round(to * (1 - Math.pow(1 - k, 3)))); if (k < 1) requestAnimationFrame(tick); };
       requestAnimationFrame(tick);
