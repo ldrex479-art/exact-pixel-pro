@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type ReactNode, type MouseEvent } from "re
 import hero from "@/assets/hero.jpg";
 import golden from "@/assets/golden.jpg";
 import owner from "@/assets/owner.jpg";
+import baker from "@/assets/baker.jpg.asset.json";
 import assorted from "@/assets/assorted.jpg";
 
 const TITLE = "CROISSANTÉ - Croissant Fresh Premium di Cimahi";
@@ -304,7 +305,16 @@ function Index() {
         <div className="grid items-center gap-12 md:grid-cols-2">
           <Reveal className="relative">
             <div className="absolute -inset-4 rounded-3xl bg-gold-gradient opacity-20 blur-2xl" />
-            <img src={owner} alt="Hendra Lesmana, Founder & Head Baker" loading="lazy" width={768} height={1024} className="relative rounded-3xl border border-gold/30" />
+            <div className="relative grid grid-cols-2 gap-4">
+              <figure>
+                <img src={owner} alt="Hendra Lesmana, Founder & Head Baker" loading="lazy" width={768} height={1024} className="aspect-[3/4] w-full rounded-3xl border border-gold/30 object-cover" />
+                <figcaption className="mt-3 text-center text-xs tracking-[0.2em] text-muted-foreground">FOUNDER</figcaption>
+              </figure>
+              <figure className="mt-10">
+                <img src={baker.url} alt="Baker CROISSANTÉ" loading="lazy" width={576} height={1024} className="aspect-[3/4] w-full rounded-3xl border border-gold/30 object-cover object-top" />
+                <figcaption className="mt-3 text-center text-xs tracking-[0.2em] text-muted-foreground">BAKER</figcaption>
+              </figure>
+            </div>
           </Reveal>
           <Reveal delay={150}>
             <p className="text-lg leading-relaxed text-muted-foreground">CROISSANTÉ lahir dari kecintaan mendalam pada croissant Prancis asli, dipanggang dalam batch kecil di Cimahi setiap hari.</p>
