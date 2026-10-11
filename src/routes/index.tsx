@@ -509,7 +509,7 @@ function Contact() {
     const t = `Halo CROISSANTÉ, saya ingin pre-order croissant: Nama: ${g("nama")}, No. HP: ${g("hp")}, Varian: ${g("varian")}, Jumlah Box: ${g("jumlah")}, Tanggal Ambil: ${g("tanggal")}, Catatan: ${g("catatan")}. Terima kasih!`;
     window.open(waLink(t), "_blank");
   };
-  const info = [["📞", "Contact Person", "0896 6821 1725"], ["📍", "Lokasi", "Cimahi, Jawa Barat"], ["👤", "Owner", "Hendra Lesmana"], ["🎵", "TikTok", "@croissante"]];
+  const info = [["📞", "Contact Person", "0896 6821 1725"], ["📍", "Lokasi", "Cimahi, Jawa Barat"], ["👤", "Owner", "Hendra & Suci"], ["🎵", "TikTok", "@croissante"]];
   return (
     <section id="kontak" className="mx-auto max-w-6xl px-5 py-28">
       <Title kicker="KONTAK">Pesan Sekarang, Croissant Fresh Menantimu</Title>
