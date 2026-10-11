@@ -235,7 +235,7 @@ function Index() {
             <Reveal key={m.n}>
               <Tilt className="glass h-full overflow-hidden rounded-2xl">
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img src={IMG[i][0]} alt={`Croissant ${m.n}`} loading="lazy" className="h-full w-full scale-150 object-cover transition-transform duration-700 hover:scale-[1.7]" style={{ objectPosition: IMG[i][1] }} />
+                  <img src={IMG[i]![0]} alt={`Croissant ${m.n}`} loading="lazy" className="h-full w-full scale-150 object-cover transition-transform duration-700 hover:scale-[1.7]" style={{ objectPosition: IMG[i]![1] }} />
                 </div>
                 <div className="p-6">
                   <p className="text-[10px] tracking-[0.3em] text-gold">{m.c.toUpperCase()}</p>
@@ -325,7 +325,7 @@ function Index() {
                 <div className="flex gap-1 text-xl text-gold">{[0, 1, 2, 3, 4].map((s) => <span key={s} className="spin-3d inline-block">★</span>)}</div>
                 <p className="mt-5 font-playfair italic leading-relaxed">"{q}"</p>
                 <div className="mt-6 flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold-gradient font-cinzel font-bold text-primary-foreground">{n[0]}</div>
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gold-gradient font-cinzel font-bold text-primary-foreground">{n?.[0]}</div>
                   <div><p className="font-semibold">{n}</p><p className="text-xs text-muted-foreground">{c}</p></div>
                 </div>
               </div>
@@ -433,7 +433,7 @@ function Golden() {
           <div className="mt-8 grid grid-cols-2 overflow-hidden rounded-2xl border border-gold/30">
             {[["Harga", "Rp 275.000"], ["Sisa Bulan Ini", "7/20"], ["Pengambilan", "H+3 s/d H+7"], ["Sertifikat", "Emas + Serial"]].map(([k, v], i) => (
               <div key={k} className={`p-5 ${i % 2 === 0 ? "border-r" : ""} ${i < 2 ? "border-b" : ""} border-gold/30`}>
-                <p className="text-xs tracking-widest text-muted-foreground">{k.toUpperCase()}</p>
+                <p className="text-xs tracking-widest text-muted-foreground">{k?.toUpperCase()}</p>
                 <p className="mt-1 font-cinzel text-lg text-gold">{v}</p>
                 {k === "Sisa Bulan Ini" && <div className="mt-2 h-1.5 rounded-full bg-muted"><div className="h-full w-[35%] rounded-full bg-gold-gradient" /></div>}
               </div>
@@ -468,7 +468,7 @@ function Contact() {
           {info.map(([i, k, v]) => (
             <div key={k} className="glass lux-card flex items-center gap-4 rounded-2xl p-5">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-gold/50 text-xl">{i}</div>
-              <div><p className="text-xs tracking-widest text-muted-foreground">{k.toUpperCase()}</p><p className="font-playfair text-lg">{v}</p></div>
+              <div><p className="text-xs tracking-widest text-muted-foreground">{k?.toUpperCase()}</p><p className="font-playfair text-lg">{v}</p></div>
             </div>
           ))}
         </Reveal>
