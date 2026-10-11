@@ -314,27 +314,33 @@ function Index() {
       {/* Tentang */}
       <section id="tentang" className="mx-auto max-w-6xl px-5 py-28">
         <Title kicker="TENTANG KAMI">Cerita <span className="font-cinzel text-gold-gradient">CROISSANTÉ</span></Title>
-        <div className="grid items-center gap-12 md:grid-cols-2">
-          <Reveal className="relative">
-            <div className="absolute -inset-4 rounded-3xl bg-gold-gradient opacity-20 blur-2xl" />
-            <div className="relative grid grid-cols-2 gap-4">
-              <figure>
-                <img src={owner} alt="Hendra Lesmana, Founder & Head Baker" loading="lazy" width={768} height={1024} className="aspect-[3/4] w-full rounded-3xl border border-gold/30 object-cover" />
-                <figcaption className="mt-3 text-center text-xs tracking-[0.2em] text-muted-foreground">FOUNDER</figcaption>
+        <Reveal className="mx-auto mb-14 max-w-2xl text-center">
+          <p className="text-lg leading-relaxed text-muted-foreground">CROISSANTÉ lahir dari kecintaan mendalam pada croissant Prancis asli, dipanggang dalam batch kecil di Cimahi setiap hari oleh dua orang yang percaya bahwa croissant terbaik dibuat dengan sabar.</p>
+        </Reveal>
+        <div className="grid gap-10 sm:grid-cols-2">
+          {[
+            { src: owner, n: "Hendra Lesmana", r: "Founder & Head Baker", pos: "center" },
+            { src: baker.url, n: "Suci", r: "Co-Founder & Pastry Chef", pos: "top" },
+          ].map((p, k) => (
+            <Reveal key={p.n} delay={k * 150}>
+              <figure className="group relative">
+                <div className="absolute -inset-3 rounded-[20px] bg-gold-gradient opacity-20 blur-2xl transition-opacity duration-500 group-hover:opacity-35" />
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-gold shadow-[0_30px_60px_-15px_oklch(0_0_0/0.9)]">
+                  <img src={p.src} alt={`${p.n}, ${p.r}`} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" style={{ objectPosition: p.pos }} />
+                  <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_80px_20px_oklch(0.13_0_0/0.75)]" />
+                </div>
+                <figcaption className="mt-5 text-center">
+                  <p className="font-cinzel text-xl tracking-[0.12em] text-gold">{p.n}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{p.r}</p>
+                </figcaption>
               </figure>
-              <figure className="mt-10">
-                <img src={baker.url} alt="Baker CROISSANTÉ" loading="lazy" width={576} height={1024} className="aspect-[3/4] w-full rounded-3xl border border-gold/30 object-cover object-top" />
-                <figcaption className="mt-3 text-center text-xs tracking-[0.2em] text-muted-foreground">BAKER</figcaption>
-              </figure>
-            </div>
-          </Reveal>
-          <Reveal delay={150}>
-            <p className="text-lg leading-relaxed text-muted-foreground">CROISSANTÉ lahir dari kecintaan mendalam pada croissant Prancis asli, dipanggang dalam batch kecil di Cimahi setiap hari.</p>
-            <blockquote className="my-10 border-l-2 border-gold pl-6 font-italiana text-3xl leading-snug">"Setiap croissant kami adalah hasil dari cinta, ketelitian, dan dedikasi."</blockquote>
-            <p className="font-cormorant text-5xl italic text-gold-gradient">Hendra Lesmana</p>
-            <p className="mt-2 text-sm tracking-[0.25em] text-muted-foreground">FOUNDER & HEAD BAKER</p>
-          </Reveal>
+            </Reveal>
+          ))}
         </div>
+        <Reveal className="mt-16 text-center">
+          <blockquote className="mx-auto max-w-3xl font-italiana text-3xl leading-snug md:text-4xl">"Setiap croissant kami adalah hasil dari cinta, ketelitian, dan dedikasi."</blockquote>
+          <p className="mt-8 font-cormorant text-5xl italic text-gold-gradient">Hendra &amp; Suci</p>
+        </Reveal>
       </section>
 
       {/* Testimoni */}
