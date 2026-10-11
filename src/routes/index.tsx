@@ -26,10 +26,22 @@ const waLink = (t: string) => `https://wa.me/${WA}?text=${encodeURIComponent(t)}
 const rp = (n: number) => "Rp" + n.toLocaleString("id-ID");
 
 type Cat = "Classic" | "Sweet" | "Savory" | "Seasonal";
-const IMG: [string, string][] = [
-  [hero, "60% 50%"], [assorted, "25% 25%"], [hero, "20% 50%"], [assorted, "80% 25%"], [assorted, "25% 80%"],
-  [assorted, "30% 30%"], [hero, "75% 60%"], [assorted, "85% 30%"], [hero, "40% 60%"], [assorted, "80% 80%"],
-  [assorted, "75% 20%"], [assorted, "35% 20%"], [hero, "55% 40%"],
+const us = (id: string) => `https://images.unsplash.com/photo-${id}?w=800&q=85`;
+// [src, objectPosition, zoomed crop of a local photo]
+const IMG: [string, string, boolean][] = [
+  [us("1555507036-ab1f4038808a"), "50% 50%", false],
+  [us("1608198093002-ad4e005484ec"), "50% 50%", false],
+  [us("1509440159596-0249088772ff"), "50% 50%", false],
+  [us("1530610476181-d83430b64dcd"), "50% 50%", false],
+  [assorted, "25% 25%", true],
+  [us("1509365465985-25d11c17e812"), "50% 50%", false],
+  [us("1587241321921-91a834d6d191"), "50% 50%", false],
+  [us("1600891964092-4316c288032e"), "50% 50%", false],
+  [assorted, "80% 80%", true],
+  [us("1568254183919-78a4f43a2877"), "50% 50%", false],
+  [us("1558961363-fa8fdf82db35"), "50% 50%", false],
+  [us("1571877227200-a0d98ea607e9"), "50% 50%", false],
+  [us("1568051243851-f9b136146e97"), "50% 50%", false],
 ];
 const MENU: { n: string; c: Cat; p: number; d: string }[] = [
   { n: "Classic Butter", c: "Classic", p: 18000, d: "Laminasi butter Prancis 24 lapis, renyah keemasan" },
@@ -211,10 +223,10 @@ function Index() {
       <section className="mx-auto max-w-7xl px-5 py-28">
         <Title kicker="KEUNGGULAN">Kenapa <span className="font-cinzel text-gold-gradient">CROISSANTÉ</span>?</Title>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {[["✦", "Varian Beragam", "Varian produk beragam & jelas untuk setiap selera."], ["♨", "Selalu Fresh", "Jaminan dipanggang fresh di hari pengambilan."], ["❖", "Bundling Hemat", "Paket bundling praktis & hemat untuk semua momen."], ["◈", "Harga Transparan", "Tanpa biaya tersembunyi, harga jelas dari awal."]].map(([i, t, d], k) => (
+          {([["croissant", "Varian Beragam", "Varian produk beragam & jelas untuk setiap selera."], ["flame", "Selalu Fresh", "Jaminan dipanggang fresh di hari pengambilan."], ["gift", "Bundling Hemat", "Paket bundling praktis & hemat untuk semua momen."], ["coin", "Harga Transparan", "Tanpa biaya tersembunyi, harga jelas dari awal."]] as const).map(([i, t, d], k) => (
             <Reveal key={t} delay={k * 100}>
               <Tilt className="glass h-full rounded-2xl p-8">
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl border border-gold/40 text-2xl text-gold">{i}</div>
+                <div className="mb-6"><GoldIcon name={i} /></div>
                 <h3 className="font-playfair text-xl">{t}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{d}</p>
               </Tilt>
@@ -236,7 +248,7 @@ function Index() {
             <Reveal key={m.n}>
               <Tilt className="glass h-full overflow-hidden rounded-2xl">
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img src={IMG[i]![0]} alt={`Croissant ${m.n}`} loading="lazy" className="h-full w-full scale-150 object-cover transition-transform duration-700 hover:scale-[1.7]" style={{ objectPosition: IMG[i]![1] }} />
+                  <img src={IMG[i]![0]} alt={`Croissant ${m.n}`} loading="lazy" className={`h-full w-full object-cover transition-transform duration-700 ${IMG[i]![2] ? "scale-150 hover:scale-[1.7]" : "hover:scale-110"}`} style={{ objectPosition: IMG[i]![1] }} />
                 </div>
                 <div className="p-6">
                   <p className="text-[10px] tracking-[0.3em] text-gold">{m.c.toUpperCase()}</p>
