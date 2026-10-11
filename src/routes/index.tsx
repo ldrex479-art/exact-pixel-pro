@@ -26,10 +26,22 @@ const waLink = (t: string) => `https://wa.me/${WA}?text=${encodeURIComponent(t)}
 const rp = (n: number) => "Rp" + n.toLocaleString("id-ID");
 
 type Cat = "Classic" | "Sweet" | "Savory" | "Seasonal";
-const IMG: [string, string][] = [
-  [hero, "60% 50%"], [assorted, "25% 25%"], [hero, "20% 50%"], [assorted, "80% 25%"], [assorted, "25% 80%"],
-  [assorted, "30% 30%"], [hero, "75% 60%"], [assorted, "85% 30%"], [hero, "40% 60%"], [assorted, "80% 80%"],
-  [assorted, "75% 20%"], [assorted, "35% 20%"], [hero, "55% 40%"],
+const us = (id: string) => `https://images.unsplash.com/photo-${id}?w=800&q=85`;
+// [src, objectPosition, zoomed crop of a local photo]
+const IMG: [string, string, boolean][] = [
+  [us("1555507036-ab1f4038808a"), "50% 50%", false],
+  [us("1608198093002-ad4e005484ec"), "50% 50%", false],
+  [us("1509440159596-0249088772ff"), "50% 50%", false],
+  [us("1530610476181-d83430b64dcd"), "50% 50%", false],
+  [assorted, "25% 25%", true],
+  [us("1509365465985-25d11c17e812"), "50% 50%", false],
+  [us("1587241321921-91a834d6d191"), "50% 50%", false],
+  [us("1600891964092-4316c288032e"), "50% 50%", false],
+  [assorted, "80% 80%", true],
+  [us("1568254183919-78a4f43a2877"), "50% 50%", false],
+  [us("1558961363-fa8fdf82db35"), "50% 50%", false],
+  [us("1571877227200-a0d98ea607e9"), "50% 50%", false],
+  [us("1568051243851-f9b136146e97"), "50% 50%", false],
 ];
 const MENU: { n: string; c: Cat; p: number; d: string }[] = [
   { n: "Classic Butter", c: "Classic", p: 18000, d: "Laminasi butter Prancis 24 lapis, renyah keemasan" },
@@ -104,6 +116,28 @@ function Title({ kicker, children }: { kicker?: string; children: ReactNode }) {
       <h2 className="font-playfair text-3xl md:text-5xl">{children}</h2>
       <div className="mx-auto mt-5 h-px w-24 bg-gold-gradient" />
     </Reveal>
+  );
+}
+function GoldIcon({ name }: { name: "croissant" | "flame" | "gift" | "coin" }) {
+  const id = `g-${name}`;
+  const shapes = {
+    croissant: <><path d="M8 44c3-16 14-28 28-28s25 12 28 28c-6 5-13 5-18 0-2-9-6-14-10-14s-8 5-10 14c-5 5-12 5-18 0z" fill={`url(#${id})`} /><path d="M24 33l4 12M48 33l-4 12M36 24v22" stroke="oklch(0.45 0.08 70)" strokeWidth="2.5" strokeLinecap="round" /></>,
+    flame: <path d="M36 6c4 12 18 18 18 34a18 18 0 0 1-36 0c0-9 5-14 9-18 0 7 3 11 7 12-3-10 0-20 2-28z" fill={`url(#${id})`} />,
+    gift: <><rect x="10" y="28" width="52" height="34" rx="4" fill={`url(#${id})`} /><rect x="6" y="20" width="60" height="12" rx="3" fill={`url(#${id})`} /><path d="M36 20v42" stroke="oklch(0.5 0.1 70)" strokeWidth="5" /><path d="M36 20c-6-10-18-12-18-4s12 4 18 4c6 0 18 4 18-4s-12-6-18 4z" fill="none" stroke="oklch(0.95 0.08 90)" strokeWidth="3" /></>,
+    coin: <><circle cx="36" cy="36" r="27" fill={`url(#${id})`} /><circle cx="36" cy="36" r="20" fill="none" stroke="oklch(0.55 0.1 72)" strokeWidth="2" /><text x="36" y="44" textAnchor="middle" fontSize="22" fontWeight="700" fill="oklch(0.45 0.08 70)" fontFamily="Cinzel, serif">Rp</text></>,
+  };
+  return (
+    <div className={`gold-icon ${name === "flame" ? "glow-pulse" : ""}`}>
+      <svg viewBox="0 0 72 72" width="72" height="72" aria-hidden>
+        <defs>
+          <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="oklch(0.97 0.07 95)" /><stop offset=".35" stopColor="oklch(0.82 0.13 88)" />
+            <stop offset=".65" stopColor="oklch(0.62 0.12 72)" /><stop offset="1" stopColor="oklch(0.86 0.11 88)" />
+          </linearGradient>
+        </defs>
+        {shapes[name]}
+      </svg>
+    </div>
   );
 }
 const Logo = ({ s = 28 }: { s?: number }) => (
@@ -211,10 +245,10 @@ function Index() {
       <section className="mx-auto max-w-7xl px-5 py-28">
         <Title kicker="KEUNGGULAN">Kenapa <span className="font-cinzel text-gold-gradient">CROISSANTÉ</span>?</Title>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {[["✦", "Varian Beragam", "Varian produk beragam & jelas untuk setiap selera."], ["♨", "Selalu Fresh", "Jaminan dipanggang fresh di hari pengambilan."], ["❖", "Bundling Hemat", "Paket bundling praktis & hemat untuk semua momen."], ["◈", "Harga Transparan", "Tanpa biaya tersembunyi, harga jelas dari awal."]].map(([i, t, d], k) => (
+          {([["croissant", "Varian Beragam", "Varian produk beragam & jelas untuk setiap selera."], ["flame", "Selalu Fresh", "Jaminan dipanggang fresh di hari pengambilan."], ["gift", "Bundling Hemat", "Paket bundling praktis & hemat untuk semua momen."], ["coin", "Harga Transparan", "Tanpa biaya tersembunyi, harga jelas dari awal."]] as const).map(([i, t, d], k) => (
             <Reveal key={t} delay={k * 100}>
               <Tilt className="glass h-full rounded-2xl p-8">
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl border border-gold/40 text-2xl text-gold">{i}</div>
+                <div className="mb-6"><GoldIcon name={i} /></div>
                 <h3 className="font-playfair text-xl">{t}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{d}</p>
               </Tilt>
@@ -236,7 +270,7 @@ function Index() {
             <Reveal key={m.n}>
               <Tilt className="glass h-full overflow-hidden rounded-2xl">
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img src={IMG[i]![0]} alt={`Croissant ${m.n}`} loading="lazy" className="h-full w-full scale-150 object-cover transition-transform duration-700 hover:scale-[1.7]" style={{ objectPosition: IMG[i]![1] }} />
+                  <img src={IMG[i]![0]} alt={`Croissant ${m.n}`} loading="lazy" className={`h-full w-full object-cover transition-transform duration-700 ${IMG[i]![2] ? "scale-150 hover:scale-[1.7]" : "hover:scale-110"}`} style={{ objectPosition: IMG[i]![1] }} />
                 </div>
                 <div className="p-6">
                   <p className="text-[10px] tracking-[0.3em] text-gold">{m.c.toUpperCase()}</p>
@@ -302,27 +336,33 @@ function Index() {
       {/* Tentang */}
       <section id="tentang" className="mx-auto max-w-6xl px-5 py-28">
         <Title kicker="TENTANG KAMI">Cerita <span className="font-cinzel text-gold-gradient">CROISSANTÉ</span></Title>
-        <div className="grid items-center gap-12 md:grid-cols-2">
-          <Reveal className="relative">
-            <div className="absolute -inset-4 rounded-3xl bg-gold-gradient opacity-20 blur-2xl" />
-            <div className="relative grid grid-cols-2 gap-4">
-              <figure>
-                <img src={owner} alt="Hendra Lesmana, Founder & Head Baker" loading="lazy" width={768} height={1024} className="aspect-[3/4] w-full rounded-3xl border border-gold/30 object-cover" />
-                <figcaption className="mt-3 text-center text-xs tracking-[0.2em] text-muted-foreground">FOUNDER</figcaption>
+        <Reveal className="mx-auto mb-14 max-w-2xl text-center">
+          <p className="text-lg leading-relaxed text-muted-foreground">CROISSANTÉ lahir dari kecintaan mendalam pada croissant Prancis asli, dipanggang dalam batch kecil di Cimahi setiap hari oleh dua orang yang percaya bahwa croissant terbaik dibuat dengan sabar.</p>
+        </Reveal>
+        <div className="grid gap-10 sm:grid-cols-2">
+          {[
+            { src: owner, n: "Hendra Lesmana", r: "Founder & Head Baker", pos: "center" },
+            { src: baker.url, n: "Suci", r: "Co-Founder & Pastry Chef", pos: "top" },
+          ].map((p, k) => (
+            <Reveal key={p.n} delay={k * 150}>
+              <figure className="group relative">
+                <div className="absolute -inset-3 rounded-[20px] bg-gold-gradient opacity-20 blur-2xl transition-opacity duration-500 group-hover:opacity-35" />
+                <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-gold shadow-[0_30px_60px_-15px_oklch(0_0_0/0.9)]">
+                  <img src={p.src} alt={`${p.n}, ${p.r}`} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" style={{ objectPosition: p.pos }} />
+                  <div className="pointer-events-none absolute inset-0 shadow-[inset_0_0_80px_20px_oklch(0.13_0_0/0.75)]" />
+                </div>
+                <figcaption className="mt-5 text-center">
+                  <p className="font-cinzel text-xl tracking-[0.12em] text-gold">{p.n}</p>
+                  <p className="mt-1 text-sm text-muted-foreground">{p.r}</p>
+                </figcaption>
               </figure>
-              <figure className="mt-10">
-                <img src={baker.url} alt="Baker CROISSANTÉ" loading="lazy" width={576} height={1024} className="aspect-[3/4] w-full rounded-3xl border border-gold/30 object-cover object-top" />
-                <figcaption className="mt-3 text-center text-xs tracking-[0.2em] text-muted-foreground">BAKER</figcaption>
-              </figure>
-            </div>
-          </Reveal>
-          <Reveal delay={150}>
-            <p className="text-lg leading-relaxed text-muted-foreground">CROISSANTÉ lahir dari kecintaan mendalam pada croissant Prancis asli, dipanggang dalam batch kecil di Cimahi setiap hari.</p>
-            <blockquote className="my-10 border-l-2 border-gold pl-6 font-italiana text-3xl leading-snug">"Setiap croissant kami adalah hasil dari cinta, ketelitian, dan dedikasi."</blockquote>
-            <p className="font-cormorant text-5xl italic text-gold-gradient">Hendra Lesmana</p>
-            <p className="mt-2 text-sm tracking-[0.25em] text-muted-foreground">FOUNDER & HEAD BAKER</p>
-          </Reveal>
+            </Reveal>
+          ))}
         </div>
+        <Reveal className="mt-16 text-center">
+          <blockquote className="mx-auto max-w-3xl font-italiana text-3xl leading-snug md:text-4xl">"Setiap croissant kami adalah hasil dari cinta, ketelitian, dan dedikasi."</blockquote>
+          <p className="mt-8 font-cormorant text-5xl italic text-gold-gradient">Hendra &amp; Suci</p>
+        </Reveal>
       </section>
 
       {/* Testimoni */}
@@ -352,7 +392,7 @@ function Index() {
           <div>
             <div className="flex items-center gap-2"><Logo /><span className="font-cinzel text-xl tracking-[0.15em] text-gold-gradient">CROISSANTÉ</span></div>
             <p className="mt-4 font-italiana text-xl">Choose your flavor. Choose your box. Enjoy your croissant.</p>
-            <p className="mt-4 font-cormorant text-3xl italic text-gold-gradient">Hendra Lesmana</p>
+            <p className="mt-4 font-cormorant text-3xl italic text-gold-gradient">Hendra &amp; Suci</p>
           </div>
           <div>
             <p className="mb-4 font-cinzel text-sm tracking-widest text-gold">MENU CEPAT</p>
@@ -360,7 +400,7 @@ function Index() {
           </div>
           <div className="text-sm text-muted-foreground">
             <p className="mb-4 font-cinzel text-sm tracking-widest text-gold">INFO</p>
-            <p>Owner: Hendra Lesmana</p><p>CP: 0896 6821 1725</p><p>Cimahi, Jawa Barat</p>
+            <p>Owner: Hendra Lesmana &amp; Suci</p><p>CP: 0896 6821 1725</p><p>Cimahi, Jawa Barat</p>
             <div className="mt-4 flex gap-3">
               <a href={`https://wa.me/${WA}`} target="_blank" rel="noreferrer" className="btn-outline-gold rounded-full px-4 py-2 text-xs">WhatsApp</a>
               <a href="https://www.tiktok.com/" target="_blank" rel="noreferrer" className="btn-outline-gold rounded-full px-4 py-2 text-xs">TikTok</a>
@@ -469,7 +509,7 @@ function Contact() {
     const t = `Halo CROISSANTÉ, saya ingin pre-order croissant: Nama: ${g("nama")}, No. HP: ${g("hp")}, Varian: ${g("varian")}, Jumlah Box: ${g("jumlah")}, Tanggal Ambil: ${g("tanggal")}, Catatan: ${g("catatan")}. Terima kasih!`;
     window.open(waLink(t), "_blank");
   };
-  const info = [["📞", "Contact Person", "0896 6821 1725"], ["📍", "Lokasi", "Cimahi, Jawa Barat"], ["👤", "Owner", "Hendra Lesmana"], ["🎵", "TikTok", "@croissante"]];
+  const info = [["📞", "Contact Person", "0896 6821 1725"], ["📍", "Lokasi", "Cimahi, Jawa Barat"], ["👤", "Owner", "Hendra & Suci"], ["🎵", "TikTok", "@croissante"]];
   return (
     <section id="kontak" className="mx-auto max-w-6xl px-5 py-28">
       <Title kicker="KONTAK">Pesan Sekarang, Croissant Fresh Menantimu</Title>

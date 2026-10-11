@@ -24,16 +24,16 @@
 
 :root {
   --radius: 1rem;
-  --background: oklch(0.13 0 0);
-  --foreground: oklch(0.93 0.01 85);
-  --card: oklch(0.2 0 0);
-  --primary: oklch(0.76 0.12 88);
-  --primary-foreground: oklch(0.13 0 0);
-  --muted: oklch(0.2 0 0);
-  --muted-foreground: oklch(0.68 0.02 85);
+  --background: #0a0a0a;
+  --foreground: #f5f0eb;
+  --card: #141414;
+  --primary: #d4af37;
+  --primary-foreground: #0a0a0a;
+  --muted: #1a1a1a;
+  --muted-foreground: #8a7e6e;
   --border: oklch(0.76 0.12 88 / 0.18);
-  --gold: oklch(0.76 0.12 88);
-  --amber: oklch(0.77 0.16 70);
+  --gold: #d4af37;
+  --amber: #f59e0b;
   --wa: oklch(0.75 0.18 150);
   --gradient-gold: linear-gradient(135deg, oklch(0.88 0.1 90), oklch(0.76 0.12 88) 45%, oklch(0.6 0.11 70));
 }
@@ -85,6 +85,14 @@
 @utility glow-pulse { animation: glowpulse 5s ease-in-out infinite; }
 @utility ripple { position: absolute; border-radius: 9999px; background: oklch(1 0 0 / .45); transform: scale(0); animation: ripple .6s linear; pointer-events: none; }
 @utility spin-3d { transition: transform .8s; &:hover { transform: rotateY(360deg); } }
+@utility gold-icon {
+  display: inline-flex; width: 76px; height: 76px; align-items: center; justify-content: center; border-radius: 1.1rem;
+  background: radial-gradient(circle at 30% 25%, oklch(0.3 0.03 85), #141414 70%);
+  border: 1px solid oklch(0.76 0.12 88 / .4);
+  box-shadow: inset 0 1px 0 oklch(1 0 0 / .12), inset 0 -6px 12px oklch(0 0 0 / .6), 0 14px 30px -10px oklch(0.76 0.12 88 / .55);
+  & svg { filter: drop-shadow(0 4px 3px oklch(0 0 0 / .7)) drop-shadow(0 0 8px oklch(0.76 0.12 88 / .45)); transition: transform .6s; }
+  &:hover svg { transform: perspective(300px) rotateY(25deg) scale(1.08); }
+}
 @utility input-3d {
   background: oklch(0.17 0 0); border: 1px solid var(--border); border-radius: .75rem; padding: .8rem 1rem; width: 100%; color: var(--foreground); transition: all .3s; color-scheme: dark;
   &:focus { outline: none; border-color: var(--gold); box-shadow: 0 10px 25px -10px oklch(0.76 0.12 88 / .5), inset 0 2px 4px oklch(0 0 0 / .5); transform: translateY(-2px); }
