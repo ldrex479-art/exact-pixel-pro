@@ -118,6 +118,28 @@ function Title({ kicker, children }: { kicker?: string; children: ReactNode }) {
     </Reveal>
   );
 }
+function GoldIcon({ name }: { name: "croissant" | "flame" | "gift" | "coin" }) {
+  const id = `g-${name}`;
+  const shapes = {
+    croissant: <><path d="M8 44c3-16 14-28 28-28s25 12 28 28c-6 5-13 5-18 0-2-9-6-14-10-14s-8 5-10 14c-5 5-12 5-18 0z" fill={`url(#${id})`} /><path d="M24 33l4 12M48 33l-4 12M36 24v22" stroke="oklch(0.45 0.08 70)" strokeWidth="2.5" strokeLinecap="round" /></>,
+    flame: <path d="M36 6c4 12 18 18 18 34a18 18 0 0 1-36 0c0-9 5-14 9-18 0 7 3 11 7 12-3-10 0-20 2-28z" fill={`url(#${id})`} />,
+    gift: <><rect x="10" y="28" width="52" height="34" rx="4" fill={`url(#${id})`} /><rect x="6" y="20" width="60" height="12" rx="3" fill={`url(#${id})`} /><path d="M36 20v42" stroke="oklch(0.5 0.1 70)" strokeWidth="5" /><path d="M36 20c-6-10-18-12-18-4s12 4 18 4c6 0 18 4 18-4s-12-6-18 4z" fill="none" stroke="oklch(0.95 0.08 90)" strokeWidth="3" /></>,
+    coin: <><circle cx="36" cy="36" r="27" fill={`url(#${id})`} /><circle cx="36" cy="36" r="20" fill="none" stroke="oklch(0.55 0.1 72)" strokeWidth="2" /><text x="36" y="44" textAnchor="middle" fontSize="22" fontWeight="700" fill="oklch(0.45 0.08 70)" fontFamily="Cinzel, serif">Rp</text></>,
+  };
+  return (
+    <div className={`gold-icon ${name === "flame" ? "glow-pulse" : ""}`}>
+      <svg viewBox="0 0 72 72" width="72" height="72" aria-hidden>
+        <defs>
+          <linearGradient id={id} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="oklch(0.97 0.07 95)" /><stop offset=".35" stopColor="oklch(0.82 0.13 88)" />
+            <stop offset=".65" stopColor="oklch(0.62 0.12 72)" /><stop offset="1" stopColor="oklch(0.86 0.11 88)" />
+          </linearGradient>
+        </defs>
+        {shapes[name]}
+      </svg>
+    </div>
+  );
+}
 const Logo = ({ s = 28 }: { s?: number }) => (
   <svg width={s} height={s} viewBox="0 0 64 64" fill="none" className="text-gold">
     <path d="M6 40c4-14 14-24 26-24s22 10 26 24c-6 4-12 4-16 0-2-8-6-12-10-12s-8 4-10 12c-4 4-10 4-16 0z" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
@@ -370,7 +392,7 @@ function Index() {
           <div>
             <div className="flex items-center gap-2"><Logo /><span className="font-cinzel text-xl tracking-[0.15em] text-gold-gradient">CROISSANTÉ</span></div>
             <p className="mt-4 font-italiana text-xl">Choose your flavor. Choose your box. Enjoy your croissant.</p>
-            <p className="mt-4 font-cormorant text-3xl italic text-gold-gradient">Hendra Lesmana</p>
+            <p className="mt-4 font-cormorant text-3xl italic text-gold-gradient">Hendra &amp; Suci</p>
           </div>
           <div>
             <p className="mb-4 font-cinzel text-sm tracking-widest text-gold">MENU CEPAT</p>
@@ -378,7 +400,7 @@ function Index() {
           </div>
           <div className="text-sm text-muted-foreground">
             <p className="mb-4 font-cinzel text-sm tracking-widest text-gold">INFO</p>
-            <p>Owner: Hendra Lesmana</p><p>CP: 0896 6821 1725</p><p>Cimahi, Jawa Barat</p>
+            <p>Owner: Hendra Lesmana &amp; Suci</p><p>CP: 0896 6821 1725</p><p>Cimahi, Jawa Barat</p>
             <div className="mt-4 flex gap-3">
               <a href={`https://wa.me/${WA}`} target="_blank" rel="noreferrer" className="btn-outline-gold rounded-full px-4 py-2 text-xs">WhatsApp</a>
               <a href="https://www.tiktok.com/" target="_blank" rel="noreferrer" className="btn-outline-gold rounded-full px-4 py-2 text-xs">TikTok</a>
